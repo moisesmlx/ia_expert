@@ -1,0 +1,5 @@
+                            with open(fr'./ia_expert/Minhas_cifras/lista_temporaria/{decode}/{n_cifra}.txt', 'a', encoding='utf-8') as arquivo:
+                                arquivo.write(str(cifra))
+                            
+                except:
+                    pass

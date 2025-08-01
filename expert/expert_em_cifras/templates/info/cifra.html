@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Cifra pronta</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <center>
+        <div id="cabeça">
+            {% load static %}
+            <img src="{% static 'logo.png' %}" alt="My image">
+
+            <h1>Expert Em Cifras</h1>
+            <h2>Aqui você pode fazer a troca de tom de qualquer cifra automáticamente, <br>
+                tanto de um tom como de todos os tons rápido e facial</h2><br>
+        </div>
+        <h1>Obrigado por usar nosso site <br>aproveite e indique para seus amigos</h1><br>
+        
+        <a href="{% url 'index' %}">Voltar ao início </a>
+
+        </center>
+        <form action="{% url 'index' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+        <a href="ia_expert/Minhas_cifras/{{n_cifra}}.zip" download="{{n_cifra}}"> download </a>
+        </form>
+        <script>
+            alert('Suas cifras estao prontas');
+        </script>
+        
+    </body>
+</html>

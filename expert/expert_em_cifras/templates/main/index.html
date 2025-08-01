@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>site expert em cifras</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+        <style>
+           
+            div[id="cabeça"]{ 
+                text-align: center;
+                color: #000080;
+            };
+
+            h1{
+                font-size: 50px
+            };
+            input{
+                padding:50px;
+                border: 10px;
+                border-radius: 5px;
+            };
+            button{
+                bgcolor='green';
+            };
+        </style>
+    </head>
+    <body>
+        <div id="cabeça">
+            {% load static %}
+            <img src="{% static 'logo.png' %}" alt="My image">
+
+            <h1>Expert Em Cifras</h1>
+            <h2>Aqui você pode fazer a troca de tom de qualquer cifra automáticamente, <br>
+                tanto de um tom como de todos os tons rápido e facial<br>
+                <b>Para ter sua cifra em todos os tons digite <font color='red'>AUTO</font> na caixainha de tom mudado ok!</b>
+            </h2><br>
+        </div>
+
+        <form method="post" action="{% url 'index' %}" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <center>
+                <label for="origi">Tom Original    </label>
+                <input type="text" name="original" id="original" placeholder="Digite o tom original aqui" required>
+
+                <label for="new">Tom Mudado   </label>
+                <input type="text" name="new" id="new" placeholder="Digite o novo tom aqui">
+
+                <label for="nome tom">Titulo Para Cifras</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite um titulo para sua cifra" required><br><br>
+            
+                <label for="textarea">Cole sua cifra aqui</label>
+
+                <button type="pasteButton" class="btn btn-secondary btn-lg" style="background-color: gray;" id="colar">   colar texto   </button><br>
+                
+                <textarea name="textarea" id="textarea" cols=100 rows=10></textarea><br>
+                
+                <button type="submit" class="btn btn-secondary btn-lg" style="background-color: chartreuse;">   Start   </button>
+
+            </center>
+
+        </form>
+        
+        <script>
+            const pasteButton = document.getElementById('colar');
+            const textArea = document.getElementById('textarea');
+
+            pasteButton.addEventListener('click', async () => {
+                try {
+                    const text = await navigator.clipboard.readText(); // Lê o texto da área de transferência
+                    textArea.value = text; // Cola o texto no textarea
+                } catch (err) {
+                    alert('Erro ao acessar a área de transferência: ' + err.message);
+                }
+            });
+        </script>
+    </body>
+</html>
